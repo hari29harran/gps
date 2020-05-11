@@ -77,7 +77,7 @@
           var date=d.getDate()+'_'+(d.getMonth()+1)+'_'+d.getFullYear();
        var un=$.session.get("email");
        $.ajax({
-            url:"http://hypertexttechies2020.000webhostapp.com/Geo_location/shared_location_list.php",
+            url:"https://hypertexttechies2020.000webhostapp.com/Geo_location/shared_location_list.php",
             type:"POST",
             data:{un:un,name:name,date:date},
             success:function(res)
@@ -92,7 +92,7 @@
   	    {
             var f=$('#tab').val();
             $.ajax({
-            url: 'http://hypertexttechies2020.000webhostapp.com/Geo_location/shared_location_map.php',
+            url: 'https://hypertexttechies2020.000webhostapp.com/Geo_location/shared_location_map.php',
             type: "POST",
 			data: {un:f},
 			
@@ -101,7 +101,7 @@
                 setInterval(function()
                 {
                     $.ajax({
-                    url: 'http://hypertexttechies2020.000webhostapp.com/Geo_location/shared_location_map.php',
+                    url: 'https://hypertexttechies2020.000webhostapp.com/Geo_location/shared_location_map.php',
                     type: "POST",
                     data: {un:f},
                     
