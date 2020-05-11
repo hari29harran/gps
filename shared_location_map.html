@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Device Properties Example</title>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <meta http-equiv="Content-Security-Policy" content="*" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/jquerysession.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <h4 id="user"></h4>
+    <p id="geo">Getting Your Friends Location.....</p>
+   
+    
+    <script type="text/javascript" charset="utf-8">
+    // if($.session.get("key")!=1 && $.session.get("key")!=2)
+    //     {
+    //         location.replace("index.html");
+    //     }
+        
+    $('#user').html("Welcome,"+$.session.get("name"));
+    var id=$.session.get("fid");
+    $.ajax({
+            url:"http://hypertexttechies2020.000webhostapp.com/Geo_location/shared_location_map.php",
+            type:"POST",
+            data:{id:id},
+            success:function(res)
+            {
+              $('#geo').html(res);
+              
+            },
+            error: function(err) {
+          alert(err);
+       }
+          });
+    setInterval(function()
+    {
+    $.ajax({
+            url:"http://hypertexttechies2020.000webhostapp.com/Geo_location/shared_location_map.php",
+            type:"POST",
+            data:{id:id},
+            success:function(res)
+            {
+              $('#geo').html(res);
+              
+            },
+            error: function(err) {
+          alert(err);
+       }
+          });
+        },20000);
+      </script>
+      <script>
+           
+      </script>
+  </body>
+</html>

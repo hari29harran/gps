@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Device Properties Example</title>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <meta http-equiv="Content-Security-Policy" content="*" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/jquerysession.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-xl bg-info navbar-dark text-center" >
+      <a class="navbar-brand" href="index.html">GPS TRACKER</a>
+  </nav>
+    <h4 id="user"></h4>
+    <p id="geo">Getting Location.....</p>
+    <center><button class="btn btn-danger" id="stop">Stop Sharing your Location</button>
+      <button class="btn btn-danger" id="back">Back</button>
+    </center>
+    
+    <script type="text/javascript" charset="utf-8">
+    if($.session.get("key")!=2)
+      {
+            location.replace("index.html");
+        }
+        else if($.session.get("key")==1)
+        {
+          location.replace("home.html");
+        }
+    $('#user').html("Welcome,"+$.session.get("name"));
+    $('#stop').hide();
+      document.addEventListener("deviceready", onDeviceReady, false);
+      function onDeviceReady() {
+        
+          navigator.geolocation.getCurrentPosition(showPosition);
+      }
+        function showPosition(position) {
+          var loc=position.coords.latitude+" ," +position.coords.longitude;
+          var name=$.session.get("name");
+          var d=new Date();
+          var date=d.getDate()+'_'+(d.getMonth()+1)+'_'+d.getFullYear();
+          $.ajax({
+            url:"http://hypertexttechies2020.000webhostapp.com/Geo_location/location.php",
+            type:"POST",
+            data:{name:name,date:date,loca:loc},
+            success:function(res)
+            {
+              // alert(res);
+            },
+            error: function(err) {
+          alert(err);
+       }
+          });
+          $.ajax({
+            url:"http://hypertexttechies2020.000webhostapp.com/Geo_location/map.php",
+            type:"POST",
+            data:{name:name,date:date},
+            success:function(res)
+            {
+              $('#geo').html(res);
+              $('#stop').show();
+            },
+            error: function(err) {
+          alert(err);
+       }
+          });
+            
+        }
+        setInterval(function()
+        {
+          if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else { 
+          alert("Geolocation is not supported by this browser.");
+        }
+        },15000);  
+        $('#stop').click(function()
+        {
+          
+          var un=$.session.get("email");
+          $.ajax({
+            url:"http://hypertexttechies2020.000webhostapp.com/Geo_location/stop_sharing.php",
+            type:"POST",
+            data:{un:un},
+            success:function(res)
+            {
+              alert(res);
+              $.session.set("key",1);
+              location.replace("home.html");
+            },
+            error: function(err) {
+          alert(err);
+       }
+          });
+        });
+        $('#back').click(function()
+        {
+          $.session.set("key",1);
+          location.replace("home.html");
+        });
+      </script>
+      <script>
+           
+      </script>
+  </body>
+</html>
