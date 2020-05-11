@@ -113,7 +113,7 @@
        );
        var un=$.session.get("email");
        $.ajax({
-            url:"http://hypertexttechies2020.000webhostapp.com/Geo_location/sharewith_list.php",
+            url:"https://hypertexttechies2020.000webhostapp.com/Geo_location/sharewith_list.php",
             type:"POST",
             data:{un:un},
             success:function(res)
@@ -130,7 +130,7 @@
             var un=$.session.get("email");
             var sw=$('#sharewith').val();
           $.ajax({
-            url:"http://hypertexttechies2020.000webhostapp.com/Geo_location/sharewith.php",
+            url:"https://hypertexttechies2020.000webhostapp.com/Geo_location/sharewith.php",
             type:"POST",
             data:{un:un,sw:sw},
             success:function(res)
