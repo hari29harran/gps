@@ -45,7 +45,7 @@
   <script src="js/bootstrap.min.js"></script>
     <title>Geolocation</title>
     <style>
-        .btn
+        .b
         {
           width:200px;
           height:100px;
@@ -60,11 +60,11 @@
     <center>
         <h4 id="user"></h4>
         <br/>
-        <button class="btn btn-primary" id="share" data-toggle="modal" data-target="#myModal">Share your Location</button>
+        <button class="btn btn-primary b" id="share" data-toggle="modal" data-target="#myModal">Share your Location</button>
         <br/><br/>
-        <button class="btn btn-success" id="view">View Friends Location</button>
+        <button class="btn btn-success b" id="view">View Friends Location</button>
         <br/><br/>
-        <button class="btn btn-danger" id="logout">Logout</button>
+        <button class="btn btn-danger b" id="logout">Logout</button>
     </center>
     <div class="modal" id="myModal">
         <div class="modal-dialog">
@@ -113,7 +113,7 @@
        );
        var un=$.session.get("email");
        $.ajax({
-            url:"https://hypertexttechies2020.000webhostapp.com/Geo_location/sharewith_list.php",
+            url:"http://hypertexttechies2020.000webhostapp.com/Geo_location/sharewith_list.php",
             type:"POST",
             data:{un:un},
             success:function(res)
@@ -130,7 +130,7 @@
             var un=$.session.get("email");
             var sw=$('#sharewith').val();
           $.ajax({
-            url:"https://hypertexttechies2020.000webhostapp.com/Geo_location/sharewith.php",
+            url:"http://hypertexttechies2020.000webhostapp.com/Geo_location/sharewith.php",
             type:"POST",
             data:{un:un,sw:sw},
             success:function(res)
